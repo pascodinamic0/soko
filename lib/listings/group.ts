@@ -43,6 +43,7 @@ export function groupListingsByCategory(
   listings: ListingWithRelations[],
   categories: Category[],
   subcategories: SubcategoryRef[],
+  minListings = 2,
 ): { category: Category; listings: ListingWithRelations[] }[] {
   const sorted = sortListingsByCategoryAndType(listings, categories, subcategories);
   const byCategory = new Map<string, ListingWithRelations[]>();
@@ -54,11 +55,26 @@ export function groupListingsByCategory(
   }
 
   return categories
-    .filter((category) => byCategory.has(category.id))
+    .filter((category) => (byCategory.get(category.id)?.length ?? 0) >= minListings)
     .map((category) => ({
       category,
       listings: byCategory.get(category.id) ?? [],
     }));
+}
+
+export function categoriesWithMinListings(
+  categories: Category[],
+  listings: ListingWithRelations[],
+  minListings = 2,
+): Category[] {
+  const counts = new Map<string, number>();
+  for (const listing of listings) {
+    counts.set(listing.category_id, (counts.get(listing.category_id) ?? 0) + 1);
+  }
+
+  return categories.filter(
+    (category) => (counts.get(category.id) ?? 0) >= minListings,
+  );
 }
 
 export function sortListingsByType(

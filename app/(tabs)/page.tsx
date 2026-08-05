@@ -3,7 +3,7 @@ import { CategoryListingSections } from "@/components/category-listing-sections"
 import { ListingGrid } from "@/components/listing-grid";
 import { SearchForm } from "@/components/search-form";
 import { SokoLogo } from "@/components/soko-logo";
-import { groupListingsByCategory } from "@/lib/listings/group";
+import { groupListingsByCategory, categoriesWithMinListings } from "@/lib/listings/group";
 import {
   filterBlockedListings,
   getBlockedUserIds,
@@ -31,6 +31,7 @@ export default async function HomePage() {
   }
 
   const featured = listings.filter((listing) => listing.is_featured);
+  const browseCategories = categoriesWithMinListings(categories, listings);
   const sections = groupListingsByCategory(listings, categories, subcategories);
 
   return (
@@ -61,7 +62,7 @@ export default async function HomePage() {
             Catégories
           </h2>
         </div>
-        <CategoryGrid categories={categories} />
+        <CategoryGrid categories={browseCategories} />
       </section>
 
       {featured.length > 0 ? (

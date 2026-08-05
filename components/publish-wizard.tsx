@@ -44,16 +44,21 @@ export function PublishWizard({
   locations: Location[];
 }) {
   const router = useRouter();
-  const [draft, setDraft] = useState<PublishDraft>(() =>
-    typeof window === "undefined" ? emptyDraft() : loadDraft(),
-  );
+  const [draft, setDraft] = useState<PublishDraft>(emptyDraft);
+  const [draftReady, setDraftReady] = useState(false);
   const [photos, setPhotos] = useState<File[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
 
   useEffect(() => {
+    setDraft(loadDraft());
+    setDraftReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!draftReady) return;
     saveDraft({ ...draft, photoNames: photos.map((p) => p.name) });
-  }, [draft, photos]);
+  }, [draft, photos, draftReady]);
 
   const subsForCategory = useMemo(
     () => subcategories.filter((s) => s.category_id === draft.categoryId),

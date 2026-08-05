@@ -1,12 +1,26 @@
 "use client";
 
-import { FormEvent, useState, useTransition } from "react";
+import { FormEvent, useEffect, useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 
 type AuthMode = "sign-in" | "sign-up";
 
 export function AuthForm() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <AuthFormSkeleton />;
+  }
+
+  return <AuthFormContent />;
+}
+
+function AuthFormContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const nextPath = searchParams.get("next") || "/menu";
@@ -14,12 +28,14 @@ export function AuthForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
-  const [error, setError] = useState<string | null>(
-    searchParams.get("error") === "oauth"
-      ? "Connexion Google impossible. Réessayez."
-      : null,
-  );
+  const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
+
+  useEffect(() => {
+    if (searchParams.get("error") === "oauth") {
+      setError("La connexion Google a échoué. Veuillez réessayer.");
+    }
+  }, [searchParams]);
 
   function onGoogleSignIn() {
     setError(null);
@@ -66,7 +82,7 @@ export function AuthForm() {
         }
 
         setError(
-          "Compte créé. Si la connexion ne démarre pas, désactivez la confirmation e-mail dans Supabase Auth.",
+          "Compte créé. Activez la connexion instantanée dans les paramètres Supabase Auth si nécessaire.",
         );
         return;
       }
@@ -87,26 +103,8 @@ export function AuthForm() {
   }
 
   return (
-    <div className="space-y-5">
-      <button
-        type="button"
-        onClick={onGoogleSignIn}
-        disabled={pending}
-        className="flex h-12 w-full items-center justify-center gap-3 rounded-[var(--soko-radius-md)] border border-soko-line bg-soko-white font-semibold text-soko-ink shadow-sm transition-colors hover:bg-soko-mist disabled:opacity-60"
-      >
-        <GoogleIcon />
-        Continuer avec Google
-      </button>
-
-      <div className="flex items-center gap-3">
-        <div className="h-px flex-1 bg-soko-line" />
-        <span className="text-xs font-medium uppercase tracking-wide text-soko-ink-muted">
-          ou
-        </span>
-        <div className="h-px flex-1 bg-soko-line" />
-      </div>
-
-      <div className="flex rounded-[var(--soko-radius-md)] border border-soko-line bg-soko-mist/60 p-1">
+    <div>
+      <div className="mb-5 flex rounded-[var(--soko-radius-md)] bg-soko-mist/80 p-1">
         <ModeButton
           active={mode === "sign-in"}
           onClick={() => {
@@ -127,63 +125,130 @@ export function AuthForm() {
         </ModeButton>
       </div>
 
+      <button
+        type="button"
+        onClick={onGoogleSignIn}
+        disabled={pending}
+        className="flex h-12 w-full items-center justify-center gap-3 rounded-[var(--soko-radius-md)] border border-soko-line bg-soko-white text-sm font-semibold text-soko-ink shadow-sm transition-all hover:border-soko-forest/20 hover:shadow disabled:opacity-60"
+      >
+        <GoogleIcon />
+        Continuer avec Google
+      </button>
+
+      <div className="my-5 flex items-center gap-3">
+        <div className="h-px flex-1 bg-soko-line/80" />
+        <span className="shrink-0 text-[11px] font-semibold uppercase tracking-[0.14em] text-soko-ink-muted">
+          ou par e-mail
+        </span>
+        <div className="h-px flex-1 bg-soko-line/80" />
+      </div>
+
       <form onSubmit={onEmailSubmit} className="space-y-4">
         {mode === "sign-up" ? (
-          <label className="block">
-            <span className="mb-1.5 block text-sm font-medium">Nom affiché</span>
+          <Field label="Nom affiché">
             <input
               type="text"
               autoComplete="name"
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
-              className="h-12 w-full rounded-[var(--soko-radius-md)] border border-soko-line bg-soko-white px-3 outline-none focus:border-soko-forest"
+              className={inputClass}
               placeholder="Marie K."
             />
-          </label>
+          </Field>
         ) : null}
 
-        <label className="block">
-          <span className="mb-1.5 block text-sm font-medium">E-mail</span>
+        <Field label="Adresse e-mail">
           <input
             type="email"
             autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="h-12 w-full rounded-[var(--soko-radius-md)] border border-soko-line bg-soko-white px-3 outline-none focus:border-soko-forest"
+            className={inputClass}
             placeholder="vous@exemple.com"
             required
           />
-        </label>
+        </Field>
 
-        <label className="block">
-          <span className="mb-1.5 block text-sm font-medium">Mot de passe</span>
+        <Field
+          label="Mot de passe"
+          hint={mode === "sign-up" ? "6 caractères minimum" : undefined}
+        >
           <input
             type="password"
             autoComplete={mode === "sign-up" ? "new-password" : "current-password"}
             minLength={6}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="h-12 w-full rounded-[var(--soko-radius-md)] border border-soko-line bg-soko-white px-3 outline-none focus:border-soko-forest"
+            className={inputClass}
             placeholder="••••••••"
             required
           />
-        </label>
+        </Field>
 
-        {error ? <p className="text-sm text-soko-danger">{error}</p> : null}
+        {error ? (
+          <p className="rounded-[var(--soko-radius-md)] border border-soko-danger/20 bg-soko-danger/5 px-3 py-2.5 text-sm text-soko-danger">
+            {error}
+          </p>
+        ) : null}
 
         <button
           type="submit"
           disabled={pending}
-          className="flex h-12 w-full items-center justify-center rounded-[var(--soko-radius-md)] bg-soko-forest font-semibold text-soko-white disabled:opacity-60"
+          className={`flex h-12 w-full items-center justify-center rounded-[var(--soko-radius-md)] font-semibold transition-opacity disabled:opacity-60 ${
+            mode === "sign-up"
+              ? "bg-soko-amber text-soko-ink shadow-[0_4px_14px_rgb(232_163_23_/25%)]"
+              : "bg-soko-forest text-soko-white shadow-[0_4px_14px_rgb(15_61_46_/18%)]"
+          }`}
         >
           {pending
-            ? "Chargement…"
+            ? "Patientez…"
             : mode === "sign-up"
               ? "Créer mon compte"
               : "Se connecter"}
         </button>
       </form>
+
+      <p className="mt-5 text-center text-xs leading-relaxed text-soko-ink-muted">
+        En continuant, vous acceptez les règles du marché Soko et notre engagement
+        pour des échanges sûrs.
+      </p>
     </div>
+  );
+}
+
+function AuthFormSkeleton() {
+  return (
+    <div className="space-y-3 py-1" aria-hidden>
+      <div className="h-11 animate-pulse rounded-[var(--soko-radius-md)] bg-soko-mist" />
+      <div className="h-12 animate-pulse rounded-[var(--soko-radius-md)] bg-soko-mist" />
+      <div className="h-12 animate-pulse rounded-[var(--soko-radius-md)] bg-soko-mist" />
+      <div className="h-12 animate-pulse rounded-[var(--soko-radius-md)] bg-soko-mist" />
+    </div>
+  );
+}
+
+const inputClass =
+  "h-12 w-full rounded-[var(--soko-radius-md)] border border-soko-line/80 bg-soko-mist/40 px-3.5 text-sm outline-none transition-colors placeholder:text-soko-ink-muted/70 focus:border-soko-forest focus:bg-soko-white";
+
+function Field({
+  label,
+  hint,
+  children,
+}: {
+  label: string;
+  hint?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <label className="block">
+      <span className="mb-1.5 flex items-baseline justify-between gap-2">
+        <span className="text-sm font-medium text-soko-ink">{label}</span>
+        {hint ? (
+          <span className="text-xs text-soko-ink-muted">{hint}</span>
+        ) : null}
+      </span>
+      {children}
+    </label>
   );
 }
 
@@ -200,7 +265,7 @@ function ModeButton({
     <button
       type="button"
       onClick={onClick}
-      className={`flex-1 rounded-[10px] py-2.5 text-sm font-semibold transition-colors ${
+      className={`flex-1 rounded-[10px] py-2.5 text-sm font-semibold transition-all ${
         active
           ? "bg-soko-white text-soko-forest shadow-sm"
           : "text-soko-ink-muted hover:text-soko-ink"
