@@ -1,0 +1,44 @@
+@import "tailwindcss";
+@import "../branding/tokens.css";
+
+@theme inline {
+  --color-soko-forest: var(--soko-forest);
+  --color-soko-forest-deep: var(--soko-forest-deep);
+  --color-soko-amber: var(--soko-amber);
+  --color-soko-amber-soft: var(--soko-amber-soft);
+  --color-soko-sand: var(--soko-sand);
+  --color-soko-clay: var(--soko-clay);
+  --color-soko-ink: var(--soko-ink);
+  --color-soko-ink-muted: var(--soko-ink-muted);
+  --color-soko-mist: var(--soko-mist);
+  --color-soko-line: var(--soko-line);
+  --color-soko-white: var(--soko-white);
+  --color-soko-success: var(--soko-success);
+  --color-soko-danger: var(--soko-danger);
+  --color-soko-bg: var(--soko-bg);
+  --color-soko-surface: var(--soko-surface);
+  --color-soko-surface-warm: var(--soko-surface-warm);
+  --font-display: var(--soko-font-display);
+  --font-ui: var(--soko-font-ui);
+  --radius-soko-sm: var(--soko-radius-sm);
+  --radius-soko-md: var(--soko-radius-md);
+  --radius-soko-lg: var(--soko-radius-lg);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgb(245 230 200 / 55%), transparent 55%),
+    radial-gradient(90% 60% at 0% 100%, rgb(15 61 46 / 8%), transparent 50%),
+    var(--soko-bg);
+  color: var(--soko-text);
+  font-family: var(--soko-font-ui);
+}
+
+::selection {
+  background: rgb(232 163 23 / 35%);
+}

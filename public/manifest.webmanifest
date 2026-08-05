@@ -1,0 +1,18 @@
+{
+  "name": "Soko",
+  "short_name": "Soko",
+  "description": "Le marché de confiance — annonces vérifiées à Kinshasa",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F3F1EC",
+  "theme_color": "#0F3D2E",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

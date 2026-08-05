@@ -1,0 +1,14 @@
+{
+  "name": "Soko",
+  "appId": "com.soko.kinshasa",
+  "webDir": "out",
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 2000,
+      "backgroundColor": "#0F3D2E"
+    }
+  }
+}

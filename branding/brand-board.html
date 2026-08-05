@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Soko — Brand Board</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./tokens.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: var(--soko-font-ui);
+        color: var(--soko-text);
+        background:
+          radial-gradient(ellipse 80% 50% at 10% 0%, rgb(232 163 23 / 18%), transparent 55%),
+          radial-gradient(ellipse 60% 40% at 90% 10%, rgb(15 61 46 / 12%), transparent 50%),
+          var(--soko-mist);
+        line-height: 1.45;
+      }
+      .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 40px 20px 80px;
+      }
+      h1,
+      h2,
+      .display {
+        font-family: var(--soko-font-display);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      h1 {
+        font-size: clamp(2.4rem, 5vw, 3.4rem);
+        margin: 0 0 8px;
+        color: var(--soko-forest);
+      }
+      .tagline {
+        font-size: 1.15rem;
+        color: var(--soko-ink-muted);
+        margin: 0 0 32px;
+      }
+      section {
+        margin-top: 40px;
+      }
+      h2 {
+        font-size: 1.35rem;
+        margin: 0 0 16px;
+        color: var(--soko-forest);
+      }
+      .logo-row {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 16px;
+      }
+      @media (max-width: 720px) {
+        .logo-row {
+          grid-template-columns: 1fr;
+        }
+      }
+      .panel {
+        background: var(--soko-surface);
+        border: 1px solid var(--soko-line);
+        border-radius: var(--soko-radius-lg);
+        padding: 20px;
+      }
+      .panel.dark {
+        background: var(--soko-forest);
+        border-color: var(--soko-forest-deep);
+        color: var(--soko-text-on-forest);
+      }
+      .panel img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: var(--soko-radius-md);
+      }
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 12px;
+      }
+      .swatch {
+        border-radius: var(--soko-radius-md);
+        overflow: hidden;
+        border: 1px solid var(--soko-line);
+        background: var(--soko-surface);
+      }
+      .swatch .chip {
+        height: 72px;
+      }
+      .swatch .meta {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+      }
+      .swatch .meta strong {
+        display: block;
+      }
+      .type-sample {
+        display: grid;
+        gap: 18px;
+      }
+      .type-sample .big {
+        font-family: var(--soko-font-display);
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        line-height: 1.1;
+        color: var(--soko-forest);
+        margin: 0;
+      }
+      .type-sample p {
+        margin: 0;
+        max-width: 52ch;
+      }
+      .muted {
+        color: var(--soko-ink-muted);
+      }
+      .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+      }
+      .btn {
+        border: 0;
+        border-radius: var(--soko-radius-md);
+        padding: 12px 18px;
+        font: 600 0.95rem var(--soko-font-ui);
+        cursor: default;
+      }
+      .btn-amber {
+        background: var(--soko-amber);
+        color: var(--soko-text-on-amber);
+      }
+      .btn-forest {
+        background: var(--soko-forest);
+        color: var(--soko-text-on-forest);
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--soko-forest);
+        border: 1px solid var(--soko-line);
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgb(232 163 23 / 16%);
+        color: var(--soko-forest-deep);
+        border: 1px solid rgb(232 163 23 / 45%);
+        border-radius: var(--soko-radius-sm);
+        padding: 6px 10px;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+      .copy-grid {
+        display: grid;
+        gap: 12px;
+      }
+      .copy-card {
+        background: var(--soko-sand);
+        border-radius: var(--soko-radius-md);
+        padding: 14px 16px;
+      }
+      .copy-card span {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--soko-ink-muted);
+        margin-bottom: 4px;
+      }
+      footer {
+        margin-top: 48px;
+        font-size: 0.85rem;
+        color: var(--soko-ink-muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <p class="badge">Brand board · Kinshasa</p>
+      <h1>Soko</h1>
+      <p class="tagline">Le marché de confiance — annonces vraies, personnes vraies, prix vrais.</p>
+
+      <section>
+        <h2>Logo</h2>
+        <div class="logo-row">
+          <div class="panel">
+            <img src="./assets/soko-logo-primary.png" alt="Soko logo primary" />
+          </div>
+          <div class="panel dark">
+            <img src="./assets/soko-app-icon.png" alt="Soko app icon" />
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Bannière</h2>
+        <div class="panel">
+          <img src="./assets/soko-brand-banner.png" alt="Soko brand banner" />
+        </div>
+      </section>
+
+      <section>
+        <h2>Variantes</h2>
+        <div class="panel">
+          <img src="./assets/soko-logo-variants.png" alt="Soko logo variants" />
+        </div>
+      </section>
+
+      <section>
+        <h2>Couleurs</h2>
+        <div class="swatches">
+          <div class="swatch">
+            <div class="chip" style="background: #0f3d2e"></div>
+            <div class="meta"><strong>Forest</strong>#0F3D2E</div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: #e8a317"></div>
+            <div class="meta"><strong>Amber</strong>#E8A317</div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: #f5e6c8"></div>
+            <div class="meta"><strong>Sand</strong>#F5E6C8</div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: #c45c26"></div>
+            <div class="meta"><strong>Clay</strong>#C45C26</div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: #14201b"></div>
+            <div class="meta"><strong>Ink</strong>#14201B</div>
+          </div>
+          <div class="swatch">
+            <div class="chip" style="background: #f3f1ec"></div>
+            <div class="meta"><strong>Mist</strong>#F3F1EC</div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Typographie</h2>
+        <div class="panel type-sample">
+          <p class="big">Trouvez le vrai. Vendez en confiance.</p>
+          <p>
+            <strong>Fraunces</strong> pour les moments de marque.
+            <span class="muted">DM Sans</span> pour l’interface, les prix et les formulaires.
+          </p>
+          <p class="muted">iPhone 13 · Gombe · 350 USD · Négociable</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Composants</h2>
+        <div class="panel">
+          <div class="buttons">
+            <button class="btn btn-amber">Publier une annonce</button>
+            <button class="btn btn-forest">Explorer Soko</button>
+            <button class="btn btn-ghost">Continuer</button>
+            <span class="badge">✓ Vérifié Soko</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Voix</h2>
+        <div class="copy-grid">
+          <div class="copy-card">
+            <span>Empty state</span>
+            Votre discussion est vide. Explorez le marché ou publiez une annonce.
+          </div>
+          <div class="copy-card">
+            <span>Trust</span>
+            Numéro masqué. La discussion reste dans Soko.
+          </div>
+          <div class="copy-card">
+            <span>CTA</span>
+            Vendre sur Soko
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        Voir <code>BRAND.md</code> et <code>tokens.css</code> pour le système complet.
+      </footer>
+    </div>
+  </body>
+</html>

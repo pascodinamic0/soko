@@ -1,0 +1,64 @@
+/**
+ * Soko design tokens
+ * Kinshasa verified classifieds
+ */
+
+:root {
+  /* Brand */
+  --soko-forest: #0f3d2e;
+  --soko-forest-deep: #0a2a1f;
+  --soko-amber: #e8a317;
+  --soko-amber-soft: #f3c96a;
+  --soko-sand: #f5e6c8;
+  --soko-clay: #c45c26;
+
+  /* Neutrals */
+  --soko-ink: #14201b;
+  --soko-ink-muted: #5c685f;
+  --soko-mist: #f3f1ec;
+  --soko-line: #d9d4cb;
+  --soko-white: #ffffff;
+
+  /* Semantic */
+  --soko-success: #1f7a4c;
+  --soko-danger: #b42318;
+  --soko-info: #1d4f6e;
+
+  /* Surfaces */
+  --soko-bg: var(--soko-mist);
+  --soko-surface: var(--soko-white);
+  --soko-surface-warm: var(--soko-sand);
+
+  /* Text */
+  --soko-text: var(--soko-ink);
+  --soko-text-muted: var(--soko-ink-muted);
+  --soko-text-on-forest: #f7f3ea;
+  --soko-text-on-amber: #1a1405;
+
+  /* Action */
+  --soko-cta: var(--soko-amber);
+  --soko-cta-text: var(--soko-text-on-amber);
+  --soko-primary: var(--soko-forest);
+  --soko-primary-text: var(--soko-text-on-forest);
+
+  /* Radius */
+  --soko-radius-sm: 8px;
+  --soko-radius-md: 12px;
+  --soko-radius-lg: 20px;
+
+  /* Type */
+  --soko-font-display: "Fraunces", "Libre Baskerville", Georgia, serif;
+  --soko-font-ui: "DM Sans", "Segoe UI", sans-serif;
+
+  /* Space */
+  --soko-space-1: 4px;
+  --soko-space-2: 8px;
+  --soko-space-3: 12px;
+  --soko-space-4: 16px;
+  --soko-space-5: 24px;
+  --soko-space-6: 32px;
+  --soko-space-7: 48px;
+
+  /* Elevation — keep shallow */
+  --soko-shadow: 0 1px 2px rgb(20 32 27 / 6%), 0 4px 12px rgb(20 32 27 / 6%);
+}
