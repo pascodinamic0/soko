@@ -164,6 +164,7 @@ export interface Database {
       locations: {
         Row: {
           id: string;
+          city: string;
           commune: string;
           quartier: string | null;
           slug: string;
@@ -172,6 +173,7 @@ export interface Database {
         };
         Insert: {
           id?: string;
+          city?: string;
           commune: string;
           quartier?: string | null;
           slug: string;
@@ -180,6 +182,7 @@ export interface Database {
         };
         Update: {
           id?: string;
+          city?: string;
           commune?: string;
           quartier?: string | null;
           slug?: string;
@@ -416,6 +419,7 @@ export interface Database {
   };
 }
 
+export type SubcategoryRow = Database["public"]["Tables"]["subcategories"]["Row"];
 export type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 export type Category = Database["public"]["Tables"]["categories"]["Row"];
 export type Location = Database["public"]["Tables"]["locations"]["Row"];
@@ -425,8 +429,9 @@ export type Conversation = Database["public"]["Tables"]["conversations"]["Row"];
 export type Message = Database["public"]["Tables"]["messages"]["Row"];
 
 export type ListingWithRelations = Listing & {
-  category: Pick<Category, "slug" | "name_fr"> | null;
-  location: Pick<Location, "commune" | "quartier" | "slug"> | null;
+  category: Pick<Category, "slug" | "name_fr" | "sort_order"> | null;
+  subcategory: Pick<SubcategoryRow, "slug" | "name_fr" | "sort_order"> | null;
+  location: Pick<Location, "city" | "commune" | "quartier" | "slug"> | null;
   listing_media: Pick<ListingMedia, "storage_path" | "is_cover" | "sort_order">[];
   seller: Pick<Profile, "id" | "display_name" | "verification_level"> | null;
 };

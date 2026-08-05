@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s · Soko",
   },
   description:
-    "Annonces vraies. Personnes vraies. Prix vrais. Marché classifié vérifié à Kinshasa.",
+    "Annonces vraies. Personnes vraies. Prix vrais. Marché classifié vérifié en RDC.",
   applicationName: "Soko",
   manifest: "/manifest.webmanifest",
   appleWebApp: {

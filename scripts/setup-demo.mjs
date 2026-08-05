@@ -100,6 +100,8 @@ async function main() {
   const files = [
     "supabase/migrations/20260805151938_initial_schema.sql",
     "supabase/migrations/20260805160000_trust_hardening.sql",
+    "supabase/migrations/20260805170000_add_city_to_locations.sql",
+    "supabase/migrations/20260805180000_auth_display_names.sql",
     "supabase/seed.sql",
   ];
 

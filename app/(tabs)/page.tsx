@@ -1,14 +1,22 @@
 import { CategoryGrid } from "@/components/category-grid";
-import { ListingGrid, MarketSectionHeader } from "@/components/listing-grid";
+import { CategoryListingSections } from "@/components/category-listing-sections";
+import { ListingGrid } from "@/components/listing-grid";
 import { SearchForm } from "@/components/search-form";
 import { SokoLogo } from "@/components/soko-logo";
-import { getFeaturedCategories, getListings } from "@/lib/listings/queries";
+import { groupListingsByCategory } from "@/lib/listings/group";
+import {
+  filterBlockedListings,
+  getBlockedUserIds,
+  getCategories,
+  getListings,
+  getSubcategories,
+} from "@/lib/listings/queries";
 import { createClient } from "@/lib/supabase/server";
 import { hasSupabaseEnv } from "@/lib/supabase/env";
-import { filterBlockedListings, getBlockedUserIds } from "@/lib/listings/queries";
 
 export default async function HomePage() {
-  const categories = await getFeaturedCategories();
+  const categories = await getCategories();
+  const subcategories = await getSubcategories();
   let listings = await getListings();
 
   if (hasSupabaseEnv()) {
@@ -21,6 +29,9 @@ export default async function HomePage() {
       listings = filterBlockedListings(listings, blocked);
     }
   }
+
+  const featured = listings.filter((listing) => listing.is_featured);
+  const sections = groupListingsByCategory(listings, categories, subcategories);
 
   return (
     <div className="px-4 pt-5">
@@ -38,7 +49,7 @@ export default async function HomePage() {
             Annonces vraies. Personnes vraies. Prix vrais.
           </p>
           <p className="mt-1 text-xs font-medium uppercase tracking-wide text-soko-amber">
-            Kinshasa · Marché classifié vérifié
+            Marché classifié vérifié
           </p>
           <SearchForm className="mt-5" />
         </div>
@@ -53,9 +64,25 @@ export default async function HomePage() {
         <CategoryGrid categories={categories} />
       </section>
 
+      {featured.length > 0 ? (
+        <section className="mt-8">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-soko-amber">
+            Annonces à la une
+          </p>
+          <ListingGrid listings={featured} />
+        </section>
+      ) : null}
+
       <section className="mt-8 pb-4">
-        <MarketSectionHeader />
-        <ListingGrid listings={listings} showFeaturedStrip />
+        <div className="mb-4">
+          <h2 className="font-[family-name:var(--soko-font-display)] text-xl font-semibold text-soko-ink">
+            Sur le marché
+          </h2>
+          <p className="mt-0.5 text-sm text-soko-ink-muted">
+            Classé par catégorie et type
+          </p>
+        </div>
+        <CategoryListingSections sections={sections} />
       </section>
     </div>
   );

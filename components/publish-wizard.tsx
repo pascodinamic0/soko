@@ -15,6 +15,7 @@ import {
   fileHash,
   validateImageFile,
 } from "@/lib/media/compress-image";
+import { formatLocationOption, groupLocationsByCity } from "@/lib/locations/display";
 import type { Category, Location } from "@/lib/supabase/database.types";
 
 type Subcategory = {
@@ -29,7 +30,7 @@ const STEPS = [
   "Catégorie",
   "Détails",
   "Prix",
-  "Quartier",
+  "Localisation",
   "Publier",
 ] as const;
 
@@ -57,6 +58,10 @@ export function PublishWizard({
   const subsForCategory = useMemo(
     () => subcategories.filter((s) => s.category_id === draft.categoryId),
     [subcategories, draft.categoryId],
+  );
+  const locationsByCity = useMemo(
+    () => groupLocationsByCity(locations),
+    [locations],
   );
 
   function update(partial: Partial<PublishDraft>) {
@@ -321,11 +326,15 @@ export function PublishWizard({
             onChange={(e) => update({ locationId: e.target.value })}
             className="w-full rounded-[var(--soko-radius-md)] border border-soko-line bg-soko-white px-3 py-3"
           >
-            <option value="">Commune / quartier</option>
-            {locations.map((loc) => (
-              <option key={loc.id} value={loc.id}>
-                {loc.quartier ? `${loc.quartier}, ${loc.commune}` : loc.commune}
-              </option>
+            <option value="">Ville / commune / quartier</option>
+            {[...locationsByCity.entries()].map(([city, cityLocations]) => (
+              <optgroup key={city} label={city}>
+                {cityLocations.map((loc) => (
+                  <option key={loc.id} value={loc.id}>
+                    {formatLocationOption(loc)}
+                  </option>
+                ))}
+              </optgroup>
             ))}
           </select>
         ) : null}

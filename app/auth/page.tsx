@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { PhoneAuthForm } from "@/components/phone-auth-form";
+import { AuthForm } from "@/components/auth-form";
 import { SokoLogo } from "@/components/soko-logo";
 import { hasSupabaseEnv } from "@/lib/supabase/env";
 
@@ -26,27 +26,25 @@ export default function AuthPage() {
           Connexion
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-soko-ink-muted">
-          Entrez votre numéro congolais. Nous envoyons un code SMS — pas de mot
-          de passe.
+          Google ou e-mail — accès immédiat, sans vérification.
         </p>
       </div>
 
       {configured ? (
         <Suspense fallback={<p className="text-sm text-soko-ink-muted">Chargement…</p>}>
-          <PhoneAuthForm />
+          <AuthForm />
         </Suspense>
       ) : (
         <div className="rounded-[var(--soko-radius-md)] border border-soko-line bg-soko-sand/50 px-4 py-5 text-sm leading-relaxed text-soko-ink-muted">
           Configurez{" "}
           <code className="text-soko-ink">NEXT_PUBLIC_SUPABASE_URL</code> et{" "}
           <code className="text-soko-ink">NEXT_PUBLIC_SUPABASE_ANON_KEY</code>{" "}
-          dans <code className="text-soko-ink">.env.local</code>, puis activez
-          Phone OTP (Twilio) dans Supabase Auth.
+          dans <code className="text-soko-ink">.env.local</code>.
         </div>
       )}
 
       <p className="mt-8 text-center text-xs text-soko-ink-muted">
-        Numéro masqué. Discussion dans l&apos;app.
+        Discussion dans l&apos;app · numéros masqués
       </p>
     </div>
   );

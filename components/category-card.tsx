@@ -12,100 +12,49 @@ export function CategoryCard({
 }) {
   const visual = getCategoryVisual(category.slug);
 
-  if (variant === "banner") {
-    return (
-      <Link
-        href={`/categorie/${category.slug}`}
-        className="group relative block aspect-[21/9] overflow-hidden rounded-[var(--soko-radius-lg)] shadow-[var(--soko-shadow)]"
-      >
-        <CategoryImage src={visual.image} alt={category.name_fr} priority />
-        <CategoryOverlay
-          name={category.name_fr}
-          hint={visual.label}
-          featured={category.is_featured}
-          large
-        />
-      </Link>
-    );
-  }
-
   return (
     <Link
       href={`/categorie/${category.slug}`}
-      className="group relative block aspect-[4/5] overflow-hidden rounded-[var(--soko-radius-lg)] shadow-[var(--soko-shadow)] transition-transform active:scale-[0.98]"
+      className={`group relative block overflow-hidden rounded-[var(--soko-radius-lg)] border border-soko-line/60 bg-soko-sand shadow-[var(--soko-shadow)] transition-transform active:scale-[0.98] ${
+        variant === "banner" ? "aspect-[2/1]" : "aspect-[4/5]"
+      }`}
     >
-      <CategoryImage src={visual.image} alt={category.name_fr} />
-      <CategoryOverlay
-        name={category.name_fr}
-        hint={visual.label}
-        featured={category.is_featured}
-      />
-    </Link>
-  );
-}
+      <div className="absolute inset-0">
+        <Image
+          src={visual.image}
+          alt={category.name_fr}
+          fill
+          className="object-cover transition duration-300 group-hover:scale-105"
+          sizes={
+            variant === "banner"
+              ? "(max-width: 768px) 100vw, 480px"
+              : "(max-width: 768px) 30vw, 160px"
+          }
+          priority={variant === "banner"}
+          unoptimized={visual.image.includes("picsum.photos")}
+        />
+      </div>
 
-function CategoryImage({
-  src,
-  alt,
-  priority = false,
-}: {
-  src: string;
-  alt: string;
-  priority?: boolean;
-}) {
-  const external = src.startsWith("http");
-
-  return (
-    <>
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        className="object-cover transition duration-300 group-hover:scale-105"
-        sizes="(max-width: 768px) 45vw, 220px"
-        priority={priority}
-        unoptimized={!external || src.includes("picsum.photos")}
-      />
-      <div className="absolute inset-0 bg-soko-forest/10 transition group-hover:bg-soko-forest/5" />
-    </>
-  );
-}
-
-function CategoryOverlay({
-  name,
-  hint,
-  featured,
-  large = false,
-}: {
-  name: string;
-  hint?: string;
-  featured?: boolean;
-  large?: boolean;
-}) {
-  return (
-    <>
-      <div className="absolute inset-0 bg-gradient-to-t from-soko-forest/92 via-soko-forest/45 to-soko-forest/10" />
-      {featured && !large ? (
-        <span className="absolute right-2.5 top-2.5 rounded-full bg-soko-amber px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-soko-ink">
+      {category.is_featured ? (
+        <span className="absolute right-2 top-2 z-10 rounded-full bg-soko-amber px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-soko-ink shadow-sm">
           Top
         </span>
       ) : null}
-      <div
-        className={`absolute inset-x-0 bottom-0 ${large ? "p-5" : "p-3.5"}`}
-      >
+
+      <div className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-soko-ink/85 via-soko-ink/35 to-transparent px-3 pb-3 pt-10">
         <p
           className={`font-semibold leading-snug text-soko-white ${
-            large ? "text-xl" : "text-sm"
+            variant === "banner" ? "text-base" : "text-xs sm:text-sm"
           }`}
         >
-          {name}
+          {category.name_fr}
         </p>
-        {hint ? (
-          <p className={`mt-0.5 text-soko-sand/90 ${large ? "text-sm" : "text-xs"}`}>
-            {hint}
+        {visual.label ? (
+          <p className="mt-0.5 line-clamp-1 text-[10px] text-soko-sand/90 sm:text-xs">
+            {visual.label}
           </p>
         ) : null}
       </div>
-    </>
+    </Link>
   );
 }

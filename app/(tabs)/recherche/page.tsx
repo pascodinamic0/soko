@@ -1,17 +1,23 @@
 import { ListingFiltersBar } from "@/components/listing-filters";
 import { ListingGrid } from "@/components/listing-grid";
 import { SearchForm } from "@/components/search-form";
+import { sortListingsByCategoryAndType } from "@/lib/listings/group";
 import {
   filterBlockedListings,
   getBlockedUserIds,
+  getCategories,
   getListings,
   getLocations,
+  getSubcategories,
 } from "@/lib/listings/queries";
 import { createClient } from "@/lib/supabase/server";
 import { hasSupabaseEnv } from "@/lib/supabase/env";
+import { redirect } from "next/navigation";
 
 type SearchParams = Promise<{
   q?: string;
+  category?: string;
+  type?: string;
   location?: string;
   min?: string;
   max?: string;
@@ -25,8 +31,17 @@ export default async function RecherchePage({
   searchParams: SearchParams;
 }) {
   const params = await searchParams;
+
+  if (params.category && !params.q && !params.location && !params.type) {
+    redirect(`/categorie/${params.category}`);
+  }
+
+  const categories = await getCategories();
+  const subcategories = await getSubcategories();
   const filters = {
     q: params.q,
+    categorySlug: params.category,
+    subcategorySlug: params.type,
     locationSlug: params.location,
     minPrice: params.min ? Number(params.min) : undefined,
     maxPrice: params.max ? Number(params.max) : undefined,
@@ -35,6 +50,10 @@ export default async function RecherchePage({
   };
 
   let listings = await getListings(filters);
+  if ((params.sort ?? "recent") === "recent") {
+    listings = sortListingsByCategoryAndType(listings, categories, subcategories);
+  }
+
   const locations = await getLocations();
 
   if (hasSupabaseEnv()) {
@@ -54,7 +73,11 @@ export default async function RecherchePage({
         Recherche
       </h1>
       <SearchForm defaultValue={params.q ?? ""} className="mt-4" />
-      <ListingFiltersBar locations={locations} params={params} />
+      <ListingFiltersBar
+        locations={locations}
+        categories={categories}
+        params={params}
+      />
       <div className="mt-4">
         <ListingGrid listings={listings} />
       </div>

@@ -67,7 +67,7 @@ export function MarketSectionHeader() {
           Sur le marché
         </h2>
         <p className="mt-0.5 text-sm text-soko-ink-muted">
-          Les dernières annonces à Kinshasa
+          Les dernières annonces
         </p>
       </div>
       <Link

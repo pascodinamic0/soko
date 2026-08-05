@@ -4,11 +4,13 @@ export function SokoLogo({
   variant = "primary",
   size = "md",
   showTagline = false,
+  iconOnly = false,
   className = "",
 }: {
   variant?: "primary" | "reverse" | "mono";
   size?: "sm" | "md" | "lg";
   showTagline?: boolean;
+  iconOnly?: boolean;
   className?: string;
 }) {
   const symbolVariant =
@@ -33,18 +35,20 @@ export function SokoLogo({
   return (
     <div className={`flex items-center gap-2.5 ${className}`}>
       <SokoSymbol className={sizes.symbol} variant={symbolVariant} />
-      <div className="min-w-0 leading-none">
-        <p
-          className={`font-[family-name:var(--soko-font-display)] font-bold tracking-tight ${sizes.word} ${wordColor}`}
-        >
-          Soko
-        </p>
-        {showTagline ? (
-          <p className={`mt-1 font-medium ${sizes.tag} ${tagColor}`}>
-            Le marché de confiance
+      {iconOnly ? null : (
+        <div className="min-w-0 leading-none">
+          <p
+            className={`font-[family-name:var(--soko-font-display)] font-bold tracking-tight ${sizes.word} ${wordColor}`}
+          >
+            Soko
           </p>
-        ) : null}
-      </div>
+          {showTagline ? (
+            <p className={`mt-1 font-medium ${sizes.tag} ${tagColor}`}>
+              Le marché de confiance
+            </p>
+          ) : null}
+        </div>
+      )}
     </div>
   );
 }

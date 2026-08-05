@@ -44,7 +44,7 @@ export default async function MesAnnoncesPage() {
         <div className="mt-6">
           <EmptyState
             title="Aucune annonce"
-            body="Publiez votre première annonce sur le marché de Kinshasa."
+            body="Publiez votre première annonce sur Soko."
             actionLabel="Vendre sur Soko"
             actionHref="/publier"
           />

@@ -1,38 +1,62 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import type { Location } from "@/lib/supabase/database.types";
+import { formatLocationOption, groupLocationsByCity } from "@/lib/locations/display";
+import type { Category, Location } from "@/lib/supabase/database.types";
 
 export function ListingFiltersBar({
   locations,
   params,
+  categories = [],
+  basePath = "/recherche",
 }: {
   locations: Location[];
   params: Record<string, string | undefined>;
+  categories?: Category[];
+  basePath?: string;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const locationsByCity = groupLocationsByCity(locations);
 
   function update(key: string, value: string) {
     const next = new URLSearchParams(searchParams.toString());
     if (value) next.set(key, value);
     else next.delete(key);
-    router.push(`/recherche?${next.toString()}`);
+    router.push(`${basePath}?${next.toString()}`);
   }
 
   return (
     <div className="mt-4 space-y-3">
       <div className="flex flex-wrap gap-2">
+        {categories.length > 0 ? (
+          <select
+            value={params.category ?? ""}
+            onChange={(e) => update("category", e.target.value)}
+            className="rounded-[var(--soko-radius-sm)] border border-soko-line bg-soko-white px-3 py-2 text-sm"
+          >
+            <option value="">Toutes les catégories</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.slug}>
+                {category.name_fr}
+              </option>
+            ))}
+          </select>
+        ) : null}
         <select
           value={params.location ?? ""}
           onChange={(e) => update("location", e.target.value)}
           className="rounded-[var(--soko-radius-sm)] border border-soko-line bg-soko-white px-3 py-2 text-sm"
         >
-          <option value="">Tous les quartiers</option>
-          {locations.map((loc) => (
-            <option key={loc.id} value={loc.slug}>
-              {loc.quartier ? `${loc.quartier}, ${loc.commune}` : loc.commune}
-            </option>
+          <option value="">Partout en RDC</option>
+          {[...locationsByCity.entries()].map(([city, cityLocations]) => (
+            <optgroup key={city} label={city}>
+              {cityLocations.map((loc) => (
+                <option key={loc.id} value={loc.slug}>
+                  {formatLocationOption(loc)}
+                </option>
+              ))}
+            </optgroup>
           ))}
         </select>
         <select

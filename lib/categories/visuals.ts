@@ -12,7 +12,7 @@ const visuals: Record<string, CategoryVisual> = {
   },
   "vehicules-motos": {
     image:
-      "https://images.unsplash.com/photo-1494976388531-d105849445bf?w=640&h=800&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=640&h=800&fit=crop&q=80",
     label: "Voitures & motos",
   },
   immobilier: {
@@ -41,8 +41,7 @@ const visuals: Record<string, CategoryVisual> = {
     label: "Services locaux",
   },
   autres: {
-    image:
-      "https://images.unsplash.com/photo-1607083206968-13611e114d12?w=640&h=800&fit=crop&q=80",
+    image: "https://picsum.photos/seed/soko-cat-autres/640/800",
     label: "Tout le reste",
   },
 };

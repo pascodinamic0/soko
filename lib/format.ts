@@ -1,5 +1,7 @@
 import type { CurrencyCode, VerificationLevel } from "@/lib/supabase/database.types";
 
+export { formatLocation } from "@/lib/locations/display";
+
 export function formatPrice(price: number, currency: CurrencyCode): string {
   if (currency === "USD") {
     return new Intl.NumberFormat("fr-CD", {
@@ -13,15 +15,6 @@ export function formatPrice(price: number, currency: CurrencyCode): string {
     style: "decimal",
     maximumFractionDigits: 0,
   }).format(price) + " CDF";
-}
-
-export function formatLocation(
-  commune: string | null | undefined,
-  quartier: string | null | undefined,
-): string {
-  if (!commune) return "Kinshasa";
-  if (quartier) return `${quartier}, ${commune}`;
-  return commune;
 }
 
 export function verificationLabel(level: VerificationLevel): string {

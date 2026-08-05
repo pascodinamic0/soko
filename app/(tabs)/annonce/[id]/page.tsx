@@ -104,7 +104,11 @@ export default async function ListingDetailPage({
         </p>
 
         <p className="mt-1 text-sm text-soko-ink-muted">
-          {formatLocation(listing.location?.commune, listing.location?.quartier)}
+          {formatLocation(
+            listing.location?.city,
+            listing.location?.commune,
+            listing.location?.quartier,
+          )}
         </p>
 
         <div className="mt-4 rounded-[var(--soko-radius-md)] bg-soko-surface-warm px-4 py-3">

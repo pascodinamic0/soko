@@ -5,6 +5,7 @@ import type { ListingWithRelations } from "@/lib/supabase/database.types";
 export type ListingFilters = {
   q?: string;
   categorySlug?: string;
+  subcategorySlug?: string;
   locationSlug?: string;
   minPrice?: number;
   maxPrice?: number;
@@ -14,11 +15,32 @@ export type ListingFilters = {
 
 const LISTING_SELECT = `
   *,
-  category:categories(slug, name_fr),
-  location:locations(commune, quartier, slug),
+  category:categories(slug, name_fr, sort_order),
+  subcategory:subcategories(slug, name_fr, sort_order),
+  location:locations(city, commune, quartier, slug),
   listing_media(storage_path, is_cover, sort_order),
   seller:profiles!listings_seller_id_fkey(id, display_name, verification_level)
 `;
+
+export async function getSubcategories(categorySlug?: string) {
+  if (!hasSupabaseEnv()) return [];
+
+  const supabase = await createClient();
+  let query = supabase.from("subcategories").select("*").order("sort_order");
+
+  if (categorySlug) {
+    const category = await getCategoryBySlug(categorySlug);
+    if (!category) return [];
+    query = query.eq("category_id", category.id);
+  }
+
+  const { data } = await query;
+  return data ?? [];
+}
+
+export async function getCategories() {
+  return getFeaturedCategories();
+}
 
 export async function getFeaturedCategories() {
   if (!hasSupabaseEnv()) return [];
@@ -72,6 +94,17 @@ export async function getListings(
     const category = await getCategoryBySlug(filters.categorySlug);
     if (category) {
       query = query.eq("category_id", category.id);
+    }
+  }
+
+  if (filters.subcategorySlug) {
+    const { data: subcategory } = await supabase
+      .from("subcategories")
+      .select("id")
+      .eq("slug", filters.subcategorySlug)
+      .single();
+    if (subcategory) {
+      query = query.eq("subcategory_id", subcategory.id);
     }
   }
 

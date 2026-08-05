@@ -27,6 +27,7 @@ export function ListingCard({
 }) {
   const cover = getCover(listing);
   const locationLabel = formatLocation(
+    listing.location?.city,
     listing.location?.commune,
     listing.location?.quartier,
   );

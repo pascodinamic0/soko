@@ -1,7 +1,7 @@
 {
   "name": "Soko",
   "short_name": "Soko",
-  "description": "Le marché de confiance — annonces vérifiées à Kinshasa",
+  "description": "Le marché de confiance — annonces vérifiées en RDC",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#F3F1EC",

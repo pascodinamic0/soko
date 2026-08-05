@@ -30,7 +30,7 @@ export function SearchForm({
           type="search"
           name="q"
           defaultValue={defaultValue}
-          placeholder="Rechercher à Kinshasa…"
+          placeholder="Rechercher sur Soko…"
           className="w-full bg-transparent text-sm outline-none placeholder:text-soko-ink-muted"
         />
       </label>
