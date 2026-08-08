@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SokoSymbol } from "@/components/soko-symbol";
 
 export function AuthPageShell({
   children,
@@ -8,100 +9,69 @@ export function AuthPageShell({
   configured: boolean;
 }) {
   return (
-    <div className="flex w-full flex-col">
-      <div className="relative mb-5 flex items-center justify-center">
-        <Link
-          href="/"
-          className="absolute left-0 flex h-10 w-10 items-center justify-center rounded-full border border-soko-line/80 bg-soko-white text-soko-forest shadow-sm transition-colors hover:bg-soko-sand/50"
-          aria-label="Retour à l'accueil"
-        >
-          <BackIcon />
-        </Link>
-        <span className="text-xs font-semibold uppercase tracking-[0.16em] text-soko-ink-muted">
-          Compte Soko
-        </span>
-      </div>
-
-      <section className="relative overflow-hidden rounded-[var(--soko-radius-lg)] border border-soko-forest-deep/20 bg-soko-forest px-5 py-7 text-center text-soko-white shadow-[var(--soko-shadow)]">
+    <div className="flex min-h-dvh w-full flex-1 flex-col">
+      <section className="relative shrink-0 overflow-hidden px-6 pb-8 pt-[max(2.5rem,env(safe-area-inset-top))] text-soko-white sm:px-8 sm:pb-10 sm:pt-12">
         <div
-          className="pointer-events-none absolute inset-0 opacity-50"
+          className="pointer-events-none absolute inset-0"
+          aria-hidden
           style={{
             backgroundImage:
-              "radial-gradient(circle at 88% 12%, rgb(232 163 23 / 38%), transparent 42%), linear-gradient(155deg, rgb(10 42 31 / 35%), transparent 55%)",
+              "radial-gradient(circle at 85% 15%, rgb(232 163 23 / 42%), transparent 40%), radial-gradient(circle at 10% 90%, rgb(245 230 200 / 12%), transparent 45%), linear-gradient(165deg, rgb(10 42 31 / 40%), transparent 60%)",
           }}
         />
-        <div className="relative">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-soko-amber">
-            Le marché de confiance
-          </p>
-          <h1 className="mt-2 font-[family-name:var(--soko-font-display)] text-2xl font-semibold tracking-tight">
-            Bienvenue sur Soko
+        <div className="relative mx-auto w-full max-w-md">
+          <Link href="/" className="inline-flex items-center gap-3">
+            <SokoSymbol
+              className="h-12 w-12 shadow-[0_6px_20px_rgb(0_0_0_/22%)]"
+              variant="color"
+            />
+            <span className="leading-none">
+              <span className="block font-[family-name:var(--soko-font-display)] text-[2rem] font-bold tracking-tight">
+                Soko
+              </span>
+              <span className="mt-1.5 block text-[11px] font-semibold uppercase tracking-[0.16em] text-soko-amber">
+                Le marché de confiance
+              </span>
+            </span>
+          </Link>
+
+          <h1 className="mt-7 max-w-[16ch] font-[family-name:var(--soko-font-display)] text-[1.75rem] font-semibold leading-[1.15] tracking-tight sm:text-[2rem]">
+            Bienvenue
           </h1>
-          <p className="mx-auto mt-2 max-w-[17rem] text-sm leading-relaxed text-soko-sand/95">
+          <p className="mt-2 max-w-sm text-sm leading-relaxed text-soko-sand/95">
             Achetez, vendez et échangez avec des personnes vérifiées.
           </p>
         </div>
       </section>
 
-      <div className="relative z-10 -mt-5 w-full">
-        <div className="rounded-[var(--soko-radius-lg)] border border-soko-line/70 bg-soko-white p-5 shadow-[0_8px_30px_rgb(15_61_46_/8%)] sm:p-6">
-          {configured ? (
-            children
-          ) : (
-            <div className="rounded-[var(--soko-radius-md)] bg-soko-sand/40 px-4 py-5 text-center text-sm leading-relaxed text-soko-ink-muted">
-              Configurez{" "}
-              <code className="text-soko-ink">NEXT_PUBLIC_SUPABASE_URL</code> et{" "}
-              <code className="text-soko-ink">NEXT_PUBLIC_SUPABASE_ANON_KEY</code>{" "}
-              dans <code className="text-soko-ink">.env.local</code>.
-            </div>
-          )}
-        </div>
+      <div className="relative flex flex-1 flex-col rounded-t-[1.75rem] bg-soko-mist px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-6 shadow-[0_-12px_40px_rgb(0_0_0_/18%)] sm:px-8 sm:pt-8">
+        <div className="mx-auto flex w-full max-w-md flex-1 flex-col">
+          <div className="flex-1 rounded-[var(--soko-radius-lg)] border border-soko-line/60 bg-soko-white p-5 shadow-[var(--soko-shadow)] sm:p-6">
+            {configured ? (
+              children
+            ) : (
+              <div className="rounded-[var(--soko-radius-md)] bg-soko-sand/40 px-4 py-5 text-center text-sm leading-relaxed text-soko-ink-muted">
+                Configurez{" "}
+                <code className="text-soko-ink">NEXT_PUBLIC_SUPABASE_URL</code>{" "}
+                et{" "}
+                <code className="text-soko-ink">
+                  NEXT_PUBLIC_SUPABASE_ANON_KEY
+                </code>{" "}
+                dans <code className="text-soko-ink">.env.local</code>.
+              </div>
+            )}
+          </div>
 
-        <ul className="mx-auto mt-6 max-w-[18rem] space-y-3 text-center">
-          <TrustPoint>Discussions sécurisées dans l&apos;application</TrustPoint>
-          <TrustPoint>Annonces et vendeurs vérifiés</TrustPoint>
-          <TrustPoint>Partout en RDC</TrustPoint>
-        </ul>
+          <p className="mt-5 text-center text-sm text-soko-ink-muted">
+            <Link
+              href="/"
+              className="font-medium text-soko-forest underline-offset-2 transition-colors hover:text-soko-forest-deep hover:underline"
+            >
+              Continuer sans compte
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
-  );
-}
-
-function TrustPoint({ children }: { children: React.ReactNode }) {
-  return (
-    <li className="flex items-center justify-center gap-2 text-sm text-soko-ink-muted">
-      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-soko-forest/10 text-soko-forest">
-        <CheckIcon />
-      </span>
-      <span>{children}</span>
-    </li>
-  );
-}
-
-function BackIcon() {
-  return (
-    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M15 18 9 12l6-6"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function CheckIcon() {
-  return (
-    <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="m5 12 4 4 10-10"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }

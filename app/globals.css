@@ -25,6 +25,16 @@
   --radius-soko-lg: var(--soko-radius-lg);
 }
 
+:root {
+  /* Bottom tab bar (ul) + home-indicator safe area */
+  --soko-bottom-nav-height: 4.25rem;
+  --soko-bottom-nav-offset: calc(
+    var(--soko-bottom-nav-height) + env(safe-area-inset-bottom, 0px)
+  );
+  /* Extra room for the raised Publier FAB (-mt-5 / h-14) */
+  --soko-action-bar-offset: calc(var(--soko-bottom-nav-offset) + 1.75rem);
+}
+
 html,
 body {
   height: 100%;

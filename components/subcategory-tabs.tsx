@@ -30,20 +30,33 @@ export function SubcategoryTabs({
   }
 
   return (
-    <div className="-mx-4 mt-4 overflow-x-auto px-4 pb-1">
-      <div className="flex w-max gap-2">
-        <TabLink href={hrefFor()} active={!activeType}>
-          Tous
-        </TabLink>
-        {subcategories.map((sub) => (
-          <TabLink
-            key={sub.id}
-            href={hrefFor(sub.slug)}
-            active={activeType === sub.slug}
-          >
-            {sub.name_fr}
+    <div className="mt-4">
+      <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-soko-ink-muted">
+        Type
+      </p>
+      <div className="relative">
+        <div
+          className="flex gap-2 overflow-x-auto overscroll-x-contain scroll-smooth pb-1 pr-10 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          role="tablist"
+          aria-label="Types"
+        >
+          <TabLink href={hrefFor()} active={!activeType}>
+            Tous
           </TabLink>
-        ))}
+          {subcategories.map((sub) => (
+            <TabLink
+              key={sub.id}
+              href={hrefFor(sub.slug)}
+              active={activeType === sub.slug}
+            >
+              {sub.name_fr}
+            </TabLink>
+          ))}
+        </div>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-soko-bg via-soko-bg/80 to-transparent"
+        />
       </div>
     </div>
   );
@@ -61,10 +74,12 @@ function TabLink({
   return (
     <Link
       href={href}
-      className={`shrink-0 rounded-full px-3.5 py-1.5 text-sm font-semibold transition-colors ${
+      role="tab"
+      aria-selected={active}
+      className={`inline-flex h-9 shrink-0 items-center rounded-full px-4 text-sm font-semibold whitespace-nowrap transition-colors ${
         active
-          ? "bg-soko-forest text-soko-white shadow-sm"
-          : "border border-soko-line bg-soko-white text-soko-ink hover:border-soko-forest/30"
+          ? "bg-soko-forest text-soko-white"
+          : "bg-soko-mist text-soko-ink ring-1 ring-inset ring-soko-line/70"
       }`}
     >
       {children}

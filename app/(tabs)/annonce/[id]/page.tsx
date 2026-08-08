@@ -46,7 +46,7 @@ export default async function ListingDetailPage({
   const cover = images[0]?.storage_path;
 
   return (
-    <div className="pb-28">
+    <div className="pb-[calc(var(--soko-action-bar-offset)+5.5rem)]">
       <div className="relative aspect-[4/3] w-full bg-soko-sand">
         {cover ? (
           <Image
@@ -135,8 +135,8 @@ export default async function ListingDetailPage({
         ) : null}
       </div>
 
-      <div className="fixed inset-x-0 bottom-[4.25rem] z-20 border-t border-soko-line bg-soko-surface/95 px-4 py-3 backdrop-blur-md">
-        <div className="mx-auto flex max-w-lg items-center gap-3 md:max-w-3xl">
+      <div className="pointer-events-none fixed inset-x-0 bottom-[var(--soko-action-bar-offset)] z-50 px-4 pb-2">
+        <div className="pointer-events-auto mx-auto flex max-w-lg items-center gap-3 rounded-[var(--soko-radius-lg)] border border-soko-line/80 bg-soko-white/95 p-3 shadow-[0_-8px_28px_rgb(15_61_46_/12%)] backdrop-blur-md md:max-w-3xl">
           <FavoriteButton listingId={listing.id} initialFavorited={favorited} />
           {currentUserId !== listing.seller_id ? (
             <ContactButton listingId={listing.id} sellerId={listing.seller_id} />

@@ -72,7 +72,10 @@ export default async function CategoryPage({
         params={query}
         basePath={`/categorie/${slug}`}
       />
-      <div className="mt-4">
+      <div className="mt-5">
+        <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-soko-ink-muted">
+          {listings.length} annonce{listings.length === 1 ? "" : "s"}
+        </p>
         <ListingGrid listings={listings} />
       </div>
     </div>

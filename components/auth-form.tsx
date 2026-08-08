@@ -104,7 +104,7 @@ function AuthFormContent() {
 
   return (
     <div>
-      <div className="mb-5 flex rounded-[var(--soko-radius-md)] bg-soko-mist/80 p-1">
+      <div className="mb-4 flex rounded-[var(--soko-radius-md)] bg-soko-mist/80 p-1">
         <ModeButton
           active={mode === "sign-in"}
           onClick={() => {
@@ -135,7 +135,7 @@ function AuthFormContent() {
         Continuer avec Google
       </button>
 
-      <div className="my-5 flex items-center gap-3">
+      <div className="my-4 flex items-center gap-3">
         <div className="h-px flex-1 bg-soko-line/80" />
         <span className="shrink-0 text-[11px] font-semibold uppercase tracking-[0.14em] text-soko-ink-muted">
           ou par e-mail
@@ -143,7 +143,7 @@ function AuthFormContent() {
         <div className="h-px flex-1 bg-soko-line/80" />
       </div>
 
-      <form onSubmit={onEmailSubmit} className="space-y-4">
+      <form onSubmit={onEmailSubmit} className="space-y-3.5">
         {mode === "sign-up" ? (
           <Field label="Nom affiché">
             <input
@@ -194,7 +194,7 @@ function AuthFormContent() {
         <button
           type="submit"
           disabled={pending}
-          className={`flex h-12 w-full items-center justify-center rounded-[var(--soko-radius-md)] font-semibold transition-opacity disabled:opacity-60 ${
+          className={`mt-1 flex h-12 w-full items-center justify-center rounded-[var(--soko-radius-md)] font-semibold transition-opacity disabled:opacity-60 ${
             mode === "sign-up"
               ? "bg-soko-amber text-soko-ink shadow-[0_4px_14px_rgb(232_163_23_/25%)]"
               : "bg-soko-forest text-soko-white shadow-[0_4px_14px_rgb(15_61_46_/18%)]"
@@ -207,11 +207,6 @@ function AuthFormContent() {
               : "Se connecter"}
         </button>
       </form>
-
-      <p className="mt-5 text-center text-xs leading-relaxed text-soko-ink-muted">
-        En continuant, vous acceptez les règles du marché Soko et notre engagement
-        pour des échanges sûrs.
-      </p>
     </div>
   );
 }

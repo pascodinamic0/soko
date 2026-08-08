@@ -48,7 +48,7 @@ export function ListingCard({
           </span>
           {listing.verification_status === "verified" ? (
             <span className="absolute right-2.5 top-2.5">
-              <TrustBadge className="text-[10px] shadow-sm" />
+              <TrustBadge size="sm" />
             </span>
           ) : null}
           <p className="absolute bottom-2.5 left-2.5 right-2.5 font-[family-name:var(--soko-font-ui)] text-xl font-bold tabular-nums text-soko-white drop-shadow">
@@ -78,7 +78,7 @@ export function ListingCard({
         <ListingImage cover={cover} title={listing.title} sizes="(max-width:768px) 45vw, 220px" />
         <div className="absolute inset-x-0 top-0 flex items-start justify-between gap-1 p-2">
           {listing.verification_status === "verified" ? (
-            <TrustBadge className="text-[10px] shadow-sm" />
+            <TrustBadge size="sm" />
           ) : (
             <span />
           )}

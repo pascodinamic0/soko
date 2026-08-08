@@ -9,7 +9,9 @@ export default function TabsLayout({
   return (
     <div className="mx-auto flex min-h-full w-full max-w-lg flex-1 flex-col md:max-w-3xl">
       <BrandHeader />
-      <main className="flex-1 pb-28">{children}</main>
+      <main className="flex-1 pb-[calc(var(--soko-bottom-nav-offset)+1.5rem)]">
+        {children}
+      </main>
       <BottomNav />
     </div>
   );

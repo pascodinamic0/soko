@@ -16,10 +16,10 @@ export function BottomNav() {
 
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-soko-line/80 bg-soko-surface/95 backdrop-blur-md"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-soko-line/80 bg-soko-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md"
       aria-label="Navigation principale"
     >
-      <ul className="mx-auto flex h-[4.25rem] max-w-lg items-end justify-between px-2 pb-2 pt-1">
+      <ul className="mx-auto flex h-[var(--soko-bottom-nav-height)] max-w-lg items-end justify-between px-2 pb-2 pt-1">
         {tabs.map((tab) => {
           const active =
             tab.href === "/"
@@ -62,7 +62,6 @@ export function BottomNav() {
           );
         })}
       </ul>
-      <div className="h-[env(safe-area-inset-bottom)]" />
     </nav>
   );
 }
