@@ -27,7 +27,7 @@ export function PwaInstallPrompt() {
 
   return (
     <div className="fixed inset-x-4 bottom-24 z-50 mx-auto max-w-lg rounded-[var(--soko-radius-md)] border border-soko-line bg-soko-white p-4 shadow-[var(--soko-shadow)] md:max-w-3xl">
-      <p className="text-sm font-semibold text-soko-ink">Installer Soko</p>
+      <p className="text-sm font-semibold text-soko-ink">Installer Zandocod</p>
       <p className="mt-1 text-xs text-soko-ink-muted">
         Accédez au marché depuis votre écran d&apos;accueil.
       </p>

@@ -1,4 +1,4 @@
-# Soko — Ops (manual review)
+# Zandocod — Ops (manual review)
 
 ## Approve seller ID verification
 

@@ -40,7 +40,7 @@ export function SokoLogo({
           <p
             className={`font-[family-name:var(--soko-font-display)] font-bold tracking-tight ${sizes.word} ${wordColor}`}
           >
-            Soko
+            Zandocod
           </p>
           {showTagline ? (
             <p className={`mt-1 font-medium ${sizes.tag} ${tagColor}`}>
