@@ -1,5 +1,12 @@
 import { createClient } from "@/lib/supabase/server";
 import { hasSupabaseEnv } from "@/lib/supabase/env";
+import {
+  demoGetCategories,
+  demoGetListingById,
+  demoGetListings,
+  demoGetLocations,
+  demoGetSubcategories,
+} from "@/lib/demo/data";
 import type { ListingWithRelations } from "@/lib/supabase/database.types";
 
 export type ListingFilters = {
@@ -23,7 +30,13 @@ const LISTING_SELECT = `
 `;
 
 export async function getSubcategories(categorySlug?: string) {
-  if (!hasSupabaseEnv()) return [];
+  if (!hasSupabaseEnv()) {
+    const subs = demoGetSubcategories();
+    if (!categorySlug) return subs;
+    const category = await getCategoryBySlug(categorySlug);
+    if (!category) return [];
+    return subs.filter((s) => s.category_id === category.id);
+  }
 
   const supabase = await createClient();
   let query = supabase.from("subcategories").select("*").order("sort_order");
@@ -43,7 +56,7 @@ export async function getCategories() {
 }
 
 export async function getFeaturedCategories() {
-  if (!hasSupabaseEnv()) return [];
+  if (!hasSupabaseEnv()) return demoGetCategories();
 
   const supabase = await createClient();
   const { data } = await supabase
@@ -55,7 +68,7 @@ export async function getFeaturedCategories() {
 }
 
 export async function getLocations() {
-  if (!hasSupabaseEnv()) return [];
+  if (!hasSupabaseEnv()) return demoGetLocations();
 
   const supabase = await createClient();
   const { data } = await supabase
@@ -67,7 +80,9 @@ export async function getLocations() {
 }
 
 export async function getCategoryBySlug(slug: string) {
-  if (!hasSupabaseEnv()) return null;
+  if (!hasSupabaseEnv()) {
+    return demoGetCategories().find((c) => c.slug === slug) ?? null;
+  }
 
   const supabase = await createClient();
   const { data } = await supabase
@@ -82,7 +97,7 @@ export async function getCategoryBySlug(slug: string) {
 export async function getListings(
   filters: ListingFilters = {},
 ): Promise<ListingWithRelations[]> {
-  if (!hasSupabaseEnv()) return [];
+  if (!hasSupabaseEnv()) return demoGetListings(filters);
 
   const supabase = await createClient();
   let query = supabase
@@ -154,7 +169,7 @@ export async function getListings(
 }
 
 export async function getListingById(id: string): Promise<ListingWithRelations | null> {
-  if (!hasSupabaseEnv()) return null;
+  if (!hasSupabaseEnv()) return demoGetListingById(id);
 
   const supabase = await createClient();
   const { data } = await supabase

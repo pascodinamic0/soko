@@ -30,6 +30,7 @@ export async function getConversation(
   conversationId: string,
   userId: string,
 ): Promise<ConversationRow | null> {
+  if (!hasSupabaseEnv()) return null;
   const supabase = await createClient();
   const { data } = await supabase
     .from("conversations")
@@ -47,6 +48,7 @@ export async function getConversation(
 }
 
 export async function getMessages(conversationId: string) {
+  if (!hasSupabaseEnv()) return [];
   const supabase = await createClient();
   const { data } = await supabase
     .from("messages")
@@ -61,6 +63,7 @@ export async function getUnreadCount(
   conversations: ConversationRow[],
   userId: string,
 ): Promise<Record<string, number>> {
+  if (!hasSupabaseEnv()) return {};
   const supabase = await createClient();
   const counts: Record<string, number> = {};
 
