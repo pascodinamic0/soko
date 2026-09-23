@@ -9,7 +9,7 @@ export default async function PublierPage() {
     return (
       <div className="px-4 pt-8">
         <h1 className="font-[family-name:var(--soko-font-display)] text-2xl font-semibold">
-          Vendre sur Soko
+          Vendre sur Zandocod
         </h1>
         <p className="mt-2 text-sm text-soko-ink-muted">
           Configurez Supabase pour publier une annonce.
@@ -27,7 +27,7 @@ export default async function PublierPage() {
     return (
       <div className="px-4 pt-8">
         <h1 className="font-[family-name:var(--soko-font-display)] text-2xl font-semibold">
-          Vendre sur Soko
+          Vendre sur Zandocod
         </h1>
         <p className="mt-2 text-sm text-soko-ink-muted">
           Connectez-vous pour publier. Numéro masqué — tout reste dans l&apos;app.

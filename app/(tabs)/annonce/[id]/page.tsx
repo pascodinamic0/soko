@@ -113,7 +113,7 @@ export default async function ListingDetailPage({
 
         <div className="mt-4 rounded-[var(--soko-radius-md)] bg-soko-surface-warm px-4 py-3">
           <p className="text-sm font-medium text-soko-ink">
-            {listing.seller?.display_name ?? "Vendeur Soko"}
+            {listing.seller?.display_name ?? "Vendeur Zandocod"}
           </p>
           <p className="mt-0.5 text-xs text-soko-ink-muted">
             {verificationLabel(listing.seller?.verification_level ?? "none")}

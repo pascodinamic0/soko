@@ -1,5 +1,5 @@
 export function TrustBadge({
-  label = "Vérifié Soko",
+  label = "Vérifié Zandocod",
   className = "",
   size = "md",
 }: {

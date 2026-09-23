@@ -38,7 +38,7 @@ export default async function MessageThreadPage({
       userId={user.id}
       initialMessages={messages}
       listingTitle={conversation.listing?.title ?? "Annonce"}
-      otherName={otherName ?? "Utilisateur Soko"}
+      otherName={otherName ?? "Utilisateur Zandocod"}
     />
   );
 }

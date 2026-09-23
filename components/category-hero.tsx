@@ -29,7 +29,7 @@ export function CategoryHero({ category }: { category: Category }) {
             {category.name_fr}
           </h1>
           <p className="mt-1 text-sm text-soko-sand/90">
-            {visual.label ?? "Partout en RDC"} · Marché Soko
+            {visual.label ?? "Partout en RDC"} · Marché Zandocod
           </p>
         </div>
       </div>

@@ -100,7 +100,7 @@ export function VerificationFlow({
     },
     {
       level: "verified",
-      title: "Badge Vérifié Soko",
+      title: "Badge Vérifié Zandocod",
       done: profile.verification_level === "verified",
     },
   ];
@@ -136,7 +136,7 @@ export function VerificationFlow({
 
       {profile.verification_level === "verified" ? (
         <p className="text-sm text-soko-success">
-          Votre compte est vérifié. Le badge Vérifié Soko s&apos;affiche sur
+          Votre compte est vérifié. Le badge Vérifié Zandocod s&apos;affiche sur
           vos annonces.
         </p>
       ) : profile.verification_level === "id_pending" ? (
@@ -149,7 +149,7 @@ export function VerificationFlow({
         <form onSubmit={uploadDocs} className="space-y-4">
           <p className="text-sm text-soko-ink-muted">
             Téléversez votre pièce d&apos;identité et un selfie pour obtenir le
-            badge Vérifié Soko.
+            badge Vérifié Zandocod.
           </p>
           <label className="block text-sm">
             <span className="mb-1 block font-medium">Pièce d&apos;identité</span>

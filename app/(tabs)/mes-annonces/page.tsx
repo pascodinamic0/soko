@@ -44,8 +44,8 @@ export default async function MesAnnoncesPage() {
         <div className="mt-6">
           <EmptyState
             title="Aucune annonce"
-            body="Publiez votre première annonce sur Soko."
-            actionLabel="Vendre sur Soko"
+            body="Publiez votre première annonce sur Zandocod."
+            actionLabel="Vendre sur Zandocod"
             actionHref="/publier"
           />
         </div>

@@ -1,4 +1,4 @@
-const CACHE = "soko-v1";
+const CACHE = "zandocod-v1";
 const ASSETS = ["/", "/manifest.webmanifest", "/icon-512.png", "/logo-primary.png"];
 
 self.addEventListener("install", (event) => {

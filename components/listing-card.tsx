@@ -119,7 +119,7 @@ function ListingImage({
   if (!cover) {
     return (
       <div className="flex h-full items-center justify-center bg-soko-sand text-xs font-medium text-soko-ink-muted">
-        Soko
+        Zandocod
       </div>
     );
   }

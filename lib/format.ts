@@ -20,7 +20,7 @@ export function formatPrice(price: number, currency: CurrencyCode): string {
 export function verificationLabel(level: VerificationLevel): string {
   switch (level) {
     case "verified":
-      return "Vérifié Soko";
+      return "Vérifié Zandocod";
     case "id_pending":
       return "Identité en cours de vérification";
     case "phone":

@@ -1,6 +1,6 @@
-# Soko
+# Zandocod
 
-Kinshasa’s verified classifieds marketplace — *Le marché de confiance*.
+Kinshasa’s verified classifieds marketplace — Le marché de confiance.
 
 ## Stack
 
@@ -66,7 +66,7 @@ Manual ops: [`docs/OPS.md`](docs/OPS.md).
 
 ```bash
 npm run build
-npx cap init Soko com.soko.kinshasa --web-dir=out   # once
+npx cap init Zandocod com.zandocod.app --web-dir=out   # once
 npx cap add ios && npx cap add android              # once
 npx cap sync
 ```
