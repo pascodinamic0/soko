@@ -62,6 +62,18 @@ Auth: `/auth` — Congolese phone OTP (`+243…`).
 
 Manual ops: [`docs/OPS.md`](docs/OPS.md).
 
+## Demo login (one-click)
+
+To enable frictionless demo login at `/demo`:
+
+1. Create two Supabase users (email/password) in your project: one for a buyer and one for a seller.
+2. Set these environment variables in `.env.local` (and Vercel):
+   - `DEMO_BUYER_EMAIL`, `DEMO_BUYER_PASSWORD`
+   - `DEMO_SELLER_EMAIL`, `DEMO_SELLER_PASSWORD`
+3. Deploy. Test at `/demo` — use “Essayer comme acheteur/vendeur”.
+
+Tip: run `npm run setup:demo` first to seed listings, conversations, and favorites.
+
 ## Capacitor (store shells)
 
 ```bash

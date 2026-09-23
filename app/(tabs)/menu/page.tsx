@@ -35,6 +35,7 @@ export default async function MenuPage() {
     .single();
 
   const links = [
+    { href: "/demo", label: "Démo (connexion rapide)" },
     { href: "/mes-annonces", label: "Mes annonces" },
     { href: "/verification", label: "Vérification" },
     { href: "/publier", label: "Vendre sur Zandocod" },
