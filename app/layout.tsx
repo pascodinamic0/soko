@@ -18,17 +18,17 @@ const fraunces = Fraunces({
 
 export const metadata: Metadata = {
   title: {
-    default: "Soko — Le marché de confiance",
-    template: "%s · Soko",
+    default: "Zandocod — Le marché de confiance",
+    template: "%s · Zandocod",
   },
   description:
     "Annonces vraies. Personnes vraies. Prix vrais. Marché classifié vérifié en RDC.",
-  applicationName: "Soko",
+  applicationName: "Zandocod",
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Soko",
+    title: "Zandocod",
   },
   icons: {
     icon: [{ url: "/icon.svg", type: "image/svg+xml" }],

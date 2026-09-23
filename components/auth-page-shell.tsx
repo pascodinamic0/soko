@@ -27,7 +27,7 @@ export function AuthPageShell({
             />
             <span className="leading-none">
               <span className="block font-[family-name:var(--soko-font-display)] text-[2rem] font-bold tracking-tight">
-                Soko
+                Zandocod
               </span>
               <span className="mt-1.5 block text-[11px] font-semibold uppercase tracking-[0.16em] text-soko-amber">
                 Le marché de confiance

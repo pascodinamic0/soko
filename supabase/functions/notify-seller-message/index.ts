@@ -61,7 +61,7 @@ Deno.serve(async (req) => {
 
   const listingTitle =
     (conversation.listing as { title?: string } | null)?.title ?? "une annonce";
-  const body = `Soko: Nouveau message sur « ${listingTitle} ». Ouvrez l'app pour répondre.`;
+  const body = `Zandocod: Nouveau message sur « ${listingTitle} ». Ouvrez l'app pour répondre.`;
 
   const accountSid = Deno.env.get("TWILIO_ACCOUNT_SID");
   const authToken = Deno.env.get("TWILIO_AUTH_TOKEN");

@@ -204,7 +204,7 @@ export function PublishWizard({
   return (
     <div className="px-4 pt-6 pb-8">
       <h1 className="font-[family-name:var(--soko-font-display)] text-2xl font-semibold">
-        Vendre sur Soko
+        Vendre sur Zandocod
       </h1>
       <p className="mt-1 text-sm text-soko-ink-muted">
         Étape {draft.step + 1} / {STEPS.length} — {STEPS[draft.step]}

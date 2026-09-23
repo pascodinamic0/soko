@@ -35,9 +35,10 @@ export default async function MenuPage() {
     .single();
 
   const links = [
+    { href: "/demo", label: "Démo (connexion rapide)" },
     { href: "/mes-annonces", label: "Mes annonces" },
     { href: "/verification", label: "Vérification" },
-    { href: "/publier", label: "Vendre sur Soko" },
+    { href: "/publier", label: "Vendre sur Zandocod" },
     { href: "/menu#support", label: "Aide & signalement" },
   ] as const;
 
@@ -48,7 +49,7 @@ export default async function MenuPage() {
       </h1>
       <div className="mt-4 rounded-[var(--soko-radius-md)] bg-soko-surface-warm px-4 py-4">
         <p className="font-semibold text-soko-ink">
-          {profile?.display_name ?? "Utilisateur Soko"}
+          {profile?.display_name ?? "Utilisateur Zandocod"}
         </p>
         <p className="mt-1 text-sm text-soko-ink-muted">
           {verificationLabel(profile?.verification_level ?? "none")}
@@ -82,7 +83,7 @@ export default async function MenuPage() {
         <ol className="mt-3 space-y-2 text-sm text-soko-ink-muted">
           <li>1. Téléphone OTP</li>
           <li>2. Pièce d&apos;identité (vendeurs)</li>
-          <li>3. Badge Vérifié Soko</li>
+          <li>3. Badge Vérifié Zandocod</li>
         </ol>
       </section>
 

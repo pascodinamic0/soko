@@ -30,7 +30,7 @@ export function SearchForm({
           type="search"
           name="q"
           defaultValue={defaultValue}
-          placeholder="Rechercher sur Soko…"
+          placeholder="Rechercher sur Zandocod…"
           className="w-full bg-transparent text-sm outline-none placeholder:text-soko-ink-muted"
         />
       </label>
