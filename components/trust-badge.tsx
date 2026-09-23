@@ -8,7 +8,8 @@ export function TrustBadge({
   /** `sm` for listing cards; `md` for detail / open space */
   size?: "sm" | "md";
 }) {
-  const shortLabel = label.replace(/\s*Soko\s*$/i, "").trim() || label;
+  const shortLabel =
+    label.replace(/\s*(Soko|Zandocod)\s*$/i, "").trim() || label;
 
   if (size === "sm") {
     return (
