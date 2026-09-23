@@ -1,6 +1,6 @@
 {
-  "name": "Soko",
-  "appId": "com.soko.kinshasa",
+  "name": "Zandocod",
+  "appId": "com.zandocod.kinshasa",
   "webDir": "out",
   "server": {
     "androidScheme": "https"

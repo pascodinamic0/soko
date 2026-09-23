@@ -37,7 +37,7 @@ export default async function FavorisPage() {
       </h1>
       <p className="mt-2 text-sm text-soko-ink-muted">
         Enregistrez des annonces pour les retrouver ici. Aucun numéro de
-        téléphone — tout reste dans Soko.
+        téléphone — tout reste dans Zandocod.
       </p>
       <div className="mt-6">
         {listings.length === 0 ? (

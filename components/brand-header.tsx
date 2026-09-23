@@ -38,7 +38,7 @@ export async function BrandHeader() {
           />
           <span className="min-w-0 leading-none">
             <span className="block font-[family-name:var(--soko-font-display)] text-[1.35rem] font-bold tracking-tight text-soko-forest">
-              Soko
+              Zandocod
             </span>
             <span className="mt-1 block text-[11px] font-semibold uppercase tracking-[0.14em] text-soko-amber">
               Le marché de confiance

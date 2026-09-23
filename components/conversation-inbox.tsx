@@ -77,7 +77,7 @@ export function ConversationInbox({
                       {conv.listing?.title ?? "Annonce"}
                     </p>
                     <p className="truncate text-sm text-soko-ink-muted">
-                      {other ?? "Utilisateur Soko"}
+                      {other ?? "Utilisateur Zandocod"}
                     </p>
                   </div>
                   <div className="shrink-0 text-right">
